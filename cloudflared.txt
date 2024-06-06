@@ -1,0 +1,38 @@
+#!/bin/sh /etc/rc.common
+
+START=99
+STOP=10
+
+USE_PROCD=1
+
+name="cloudflared"
+cmd="/usr/bin/cloudflared --pidfile /var/run/$name.pid --autoupdate-freq 24h0m0s tunnel run --token "eyJhIjoiOTJmMjI3Y2E1MjVhNTI2Y2JkOTQwZGUxMT************ODAwOC00ODc4LTg0NmEtZmE0OWE4ZmUyZjgxI**************************"
+pid_file="/var/run/$name.pid"
+stdout_log="/var/log/$name.log"
+stderr_log="/var/log/$name.err"
+
+start_service() {
+    procd_open_instance
+    procd_set_param command $cmd
+    procd_set_param stdout $stdout_log
+    procd_set_param stderr $stderr_log
+    procd_set_param pidfile $pid_file
+    procd_set_param respawn
+    procd_close_instance
+}
+
+stop_service() {
+    if [ -f "$pid_file" ]; then
+        kill $(cat $pid_file)
+        rm -f $pid_file
+    fi
+}
+
+restart_service() {
+    stop_service
+    start_service
+}
+
+service_triggers() {
+    procd_add_reload_trigger "cloudflared"
+}
