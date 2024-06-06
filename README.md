@@ -1,6 +1,6 @@
 # How to Install Cloudflared on OpenWrt
 
-Installing Cloudflared on OpenWrt can be a bit tricky if you rely on the `opkg` package manager, as the Cloudflared version available there might be outdated. This is particularly true for devices with specialized hardware, like those found in wired chips. To ensure you have the latest version of Cloudflared compatible with your device, follow these steps:
+Installing Cloudflared on OpenWrt can be a bit tricky if you rely on the `opkg` package manager, as the Cloudflared version available there might be outdated. This is particularly true for devices with specialized hardware, and most openwrt are installed on some wired chips. To ensure you have the latest version of Cloudflared compatible with your device, follow these steps:
 
 1. **Download the Latest Version**: Visit the [Cloudflared releases page](https://github.com/cloudflare/cloudflared/releases) and download the appropriate version for your device. For example, if you're using a Raspberry Pi with OpenWrt, you might need `cloudflared-linux-aarch64.rpm`.
 
